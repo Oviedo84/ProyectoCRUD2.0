@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".InsertProduct">
+
+    <TextView
+        android:id="@+id/topText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="32dp"
+        android:fontFamily="@font/work_sans"
+        android:text="Insertar Producto"
+        android:gravity="center_horizontal"
+        android:textSize="34sp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/_nombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/topText"
+        android:layout_marginRight="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp">
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre"
+        android:background="@drawable/round_border"
+        android:id="@+id/nombre"
+        android:fontFamily="@font/work_sans"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/_descripcion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/_nombre"
+        android:layout_marginRight="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Descripcion"
+            android:background="@drawable/round_border"
+            android:id="@+id/descripcion"
+            android:fontFamily="@font/work_sans"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/_precio_venta"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/_descripcion"
+        android:layout_marginRight="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Precio Venta"
+            android:background="@drawable/round_border"
+            android:id="@+id/precio_venta"
+            android:inputType="number"
+            android:fontFamily="@font/work_sans"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/_precio_compra"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/_descripcion"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_toRightOf="@id/_precio_venta"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Precio Compra"
+            android:background="@drawable/round_border"
+            android:id="@+id/precio_compra"
+            android:inputType="number"
+            android:fontFamily="@font/work_sans"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/fecha"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/_precio_venta"
+        android:layout_marginRight="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Fecha"
+            android:background="@drawable/round_border"
+            android:id="@+id/fechaFormat"
+            android:inputType="date"
+            android:fontFamily="@font/work_sans"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/_activo"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="150dp"
+        android:layout_height="55dp"
+        android:layout_below="@id/_precio_compra"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="32dp"
+        android:layout_toRightOf="@id/fecha"
+        android:background="@drawable/round_border"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp">
+
+        <AutoCompleteTextView
+            android:id="@+id/activo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/work_sans"
+            android:hint="Activo"
+            android:inputType="none"
+            android:gravity="fill_vertical"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/_cantidad"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fecha"
+        android:layout_marginRight="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Cantidad"
+            android:background="@drawable/round_border"
+            android:id="@+id/cantidad"
+            android:inputType="number"
+            android:fontFamily="@font/work_sans"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/insert_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/round_bg"
+        android:fontFamily="@font/work_sans"
+        android:text="Insertar"
+        android:layout_below="@id/_cantidad"/>
+</RelativeLayout>
