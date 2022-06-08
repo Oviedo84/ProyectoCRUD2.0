@@ -60,7 +60,7 @@
         android:id="@+id/_precio_venta"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/_descripcion"
+        android:layout_below="@id/_categoria"
         android:layout_marginRight="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="16dp"
@@ -80,7 +80,7 @@
         android:id="@+id/_precio_compra"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/_descripcion"
+        android:layout_below="@id/_categoria"
         android:layout_marginRight="32dp"
         android:layout_marginTop="16dp"
         android:layout_toRightOf="@id/_precio_venta"
@@ -117,24 +117,24 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/_activo"
+        android:id="@+id/_categoria"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-        android:layout_width="150dp"
+        android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:layout_below="@id/_precio_compra"
+        android:layout_below="@id/_descripcion"
         android:layout_marginTop="16dp"
         android:layout_marginRight="32dp"
-        android:layout_toRightOf="@id/fecha"
+        android:layout_marginLeft="32dp"
         android:background="@drawable/round_border"
         app:boxStrokeWidth="0dp"
         app:boxStrokeWidthFocused="0dp">
 
         <AutoCompleteTextView
-            android:id="@+id/activo"
+            android:id="@+id/categoria"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="@font/work_sans"
-            android:hint="Activo"
+            android:hint="Categoría"
             android:inputType="none"
             android:gravity="fill_vertical"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -157,6 +157,29 @@
             android:id="@+id/cantidad"
             android:inputType="number"
             android:fontFamily="@font/work_sans"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/_activo"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="150dp"
+        android:layout_height="55dp"
+        android:layout_below="@id/_precio_compra"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="32dp"
+        android:layout_toRightOf="@id/fecha"
+        android:background="@drawable/round_border"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp">
+
+        <AutoCompleteTextView
+            android:id="@+id/activo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/work_sans"
+            android:hint="Activo"
+            android:inputType="none"
+            android:gravity="fill_vertical"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button

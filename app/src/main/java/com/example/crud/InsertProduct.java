@@ -42,6 +42,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -55,10 +56,12 @@ public class InsertProduct extends Fragment {
     private EditText insertNombre, insertDescripcion, insertPventa, insertPcompra, insertFecha, insertCantidad;
     RequestQueue requestQueue;
     EditText mDateFormat;
-    List<GetProducts> getProductsList;
+    List<GetCategories> getCategoriesList;
     String[] items = {"1", "0"};
     AutoCompleteTextView insertActivo;
-    ArrayAdapter<String> adapterItems;
+    AutoCompleteTextView insertCategoria;
+    ArrayAdapter<String> adapterCategorias;
+    ArrayAdapter<String> adapterActivo;
 
     @Nullable
     @Override
@@ -84,15 +87,13 @@ public class InsertProduct extends Fragment {
         insertFecha = (EditText) view.findViewById(R.id.fechaFormat);
         insertCantidad = (EditText) view.findViewById(R.id.cantidad);
         insertActivo = (AutoCompleteTextView) view.findViewById(R.id.activo);
+        insertCategoria = (AutoCompleteTextView) view.findViewById(R.id.categoria);
 
-        adapterItems = new ArrayAdapter<String>(getContext(),R.layout.list_product_active,items);
-        insertActivo.setAdapter(adapterItems);
-        insertActivo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String item = parent.getItemAtPosition(position).toString();
-            }
-        });
+        // Selection Categoria
+        CategorySelection();
+
+        // Selection Activo
+        ActiveSelection();
 
         insertButton = (Button) view.findViewById(R.id.insert_button);
         insertButton.setOnClickListener(new View.OnClickListener() {
@@ -221,5 +222,62 @@ public class InsertProduct extends Fragment {
         if (activity != null) {
             activity.hideFAB();
         }
+    }
+
+    private void getCategories(){
+        JsonArrayRequest arrayRequest = new JsonArrayRequest(
+                Request.Method.GET,
+                categorias,
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        int size = response.length();
+                        for (int i = 0; i < size; i++) {
+                            try {
+                                JSONObject jsonObject = new JSONObject(response.get(i).toString());
+                                String categoria_id = jsonObject.getString("categoria_id");
+                                String nombre = jsonObject.getString("nombre");
+                                String descripcion = jsonObject.getString("descripcion");
+                                getCategoriesList.add(new GetCategories(categoria_id, nombre, descripcion));
+                                adapterCategorias.add(nombre);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }
+        );
+        requestQueue.add(arrayRequest);
+    }
+
+    private void ActiveSelection(){
+        adapterActivo = new ArrayAdapter<String>(getContext(),R.layout.list_product_active, items);
+        insertActivo.setAdapter(adapterActivo);
+        insertActivo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String item = parent.getItemAtPosition(position).toString();
+            }
+        });
+    }
+
+    private void CategorySelection(){
+        getCategoriesList = new ArrayList<>();
+        adapterCategorias = new ArrayAdapter<String>(getContext(),R.layout.list_product_active);
+        this.getCategories();
+        insertCategoria.setAdapter(adapterCategorias);
+        insertCategoria.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String item = parent.getItemAtPosition(position).toString();
+            }
+        });
     }
 }

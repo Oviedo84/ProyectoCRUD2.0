@@ -40,7 +40,6 @@ public class ListProducts extends Fragment {
     List<GetProducts> mProducto;
     Adapter adapter;
     TextView textView;
-    int refresh;
 
     @Nullable
     @Override
