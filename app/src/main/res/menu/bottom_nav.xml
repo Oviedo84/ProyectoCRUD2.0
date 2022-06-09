@@ -8,10 +8,10 @@
         android:title=""/>
     <item android:id="@+id/placeholder02"
         android:title=""/>
-    <item android:id="@+id/miSearch"
-        android:title="Search"
-        android:icon="@drawable/ic_search"/>
     <item android:id="@+id/miFilter"
         android:title="Filter"
         android:icon="@drawable/ic_filter"/>
+    <item android:id="@+id/miSearch"
+        android:title="Search"
+        android:icon="@drawable/ic_search"/>
 </menu>

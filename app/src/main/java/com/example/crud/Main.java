@@ -2,41 +2,30 @@ package com.example.crud;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.fragment.NavHostFragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
-
-public class MainProductos extends AppCompatActivity {
+public class Main extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     FloatingActionButton floatingActionButton;
     BottomNavigationView bottomnavigationview;
+    NavigationView navigationView;
+    int numActivity = 1;
+    DrawerLayout mDrawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_productos);
+        setContentView(R.layout.main);
 
         // Bottom Navigation View
         bottomnavigationview = findViewById(R.id.bottomNavigationView);
@@ -44,6 +33,11 @@ public class MainProductos extends AppCompatActivity {
         bottomnavigationview.getMenu().getItem(1).setEnabled(false);
         bottomnavigationview.getMenu().getItem(2).setEnabled(false);
         bottomnavigationview.setOnItemSelectedListener(mOnItemSelectedListener);
+
+        // Navigation Drawer
+        mDrawerLayout = findViewById(R.id.drawerlayout);
+        navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
         //Floating Action Button
         floatingActionButton = findViewById(R.id.fab);
@@ -57,7 +51,14 @@ public class MainProductos extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 hideFAB();
-                getSupportFragmentManager().beginTransaction().replace(R.id.load_fragment, new InsertProduct()).addToBackStack(null).commit();
+                switch (numActivity) {
+                    case 1:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.load_fragment, new InsertProduct()).addToBackStack(null).commit();
+                        break;
+                    case 2:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.load_fragment, new EditProducts()).addToBackStack(null).commit();
+                        break;
+                }
             }
         });
     }
@@ -73,7 +74,7 @@ public class MainProductos extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        MainProductos activity = MainProductos.this;
+        Main activity = Main.this;
         if(activity != null){
             activity.showUpFAB();
         }
@@ -95,16 +96,45 @@ public class MainProductos extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.miMenu:
-                    Toast.makeText(MainProductos.this, "Menu Seleccionado", Toast.LENGTH_SHORT).show();
+                    mDrawerLayout.open();
                     return true;
                 case R.id.miSearch:
-                    Toast.makeText(MainProductos.this, "Search Seleccionado", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Main.this, "Search Seleccionado", Toast.LENGTH_SHORT).show();
                     return true;
                 case R.id.miFilter:
-                    Toast.makeText(MainProductos.this, "Filter Seleccionado", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Main.this, "Filter Seleccionado", Toast.LENGTH_SHORT).show();
                     return true;
             }
             return false;
         }
     };
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        selectItemNav(item);
+        return true;
+    }
+
+    private void selectItemNav(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.nav_productos:
+                numActivity = 1;
+                Toast.makeText(Main.this, "Productos Seleccionado", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_categoria:
+                numActivity = 2;
+                Toast.makeText(Main.this, "Categoria Seleccionado", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_compras:
+                numActivity = 3;
+                Toast.makeText(Main.this, "Compras Seleccionado", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_usuarios:
+                numActivity = 4;
+                Toast.makeText(Main.this, "Usuarios Seleccionado", Toast.LENGTH_SHORT).show();
+                break;
+        }
+    }
+
+
 }

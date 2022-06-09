@@ -1,10 +1,6 @@
 package com.example.crud;
 
-import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,9 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -35,7 +29,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -108,7 +101,7 @@ public class InsertProduct extends Fragment {
                     transaction.commit();
 
                     // Mostrar el FAB
-                    MainProductos activity = (MainProductos)getActivity();
+                    Main activity = (Main)getActivity();
                     activity.showUpFAB();
                 }
             }
@@ -218,7 +211,7 @@ public class InsertProduct extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        MainProductos activity = (MainProductos)getActivity();
+        Main activity = (Main)getActivity();
         if (activity != null) {
             activity.hideFAB();
         }

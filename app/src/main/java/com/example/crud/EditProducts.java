@@ -124,7 +124,7 @@ public class EditProducts extends Fragment {
                     transaction.commit();
 
                     // Mostrar el FAB
-                    MainProductos activity = (MainProductos)getActivity();
+                    Main activity = (Main)getActivity();
                     activity.showUpFAB();
                 }
             }
@@ -234,7 +234,7 @@ public class EditProducts extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        MainProductos activity = (MainProductos)getActivity();
+        Main activity = (Main)getActivity();
         if (activity != null) {
             activity.hideFAB();
         }

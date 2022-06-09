@@ -33,7 +33,7 @@ public class Login extends AppCompatActivity {
 
     private void mainPage(int privileges){
         if(privileges == 1){
-            Intent intent = new Intent(this, MainProductos.class);
+            Intent intent = new Intent(this, Main.class);
             startActivity(intent);
         }
     }
