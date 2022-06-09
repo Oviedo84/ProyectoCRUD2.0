@@ -1,5 +1,6 @@
 package com.example.crud;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -36,11 +37,15 @@ public class MainProductos extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_productos);
+
+        // Bottom Navigation View
         bottomnavigationview = findViewById(R.id.bottomNavigationView);
         bottomnavigationview.setBackground(null);
         bottomnavigationview.getMenu().getItem(1).setEnabled(false);
         bottomnavigationview.getMenu().getItem(2).setEnabled(false);
+        bottomnavigationview.setOnItemSelectedListener(mOnItemSelectedListener);
 
+        //Floating Action Button
         floatingActionButton = findViewById(R.id.fab);
         // Fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -84,4 +89,22 @@ public class MainProductos extends AppCompatActivity {
             mgr.popBackStackImmediate();
         }
     }
+
+    private final BottomNavigationView.OnItemSelectedListener mOnItemSelectedListener = new BottomNavigationView.OnItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.miMenu:
+                    Toast.makeText(MainProductos.this, "Menu Seleccionado", Toast.LENGTH_SHORT).show();
+                    return true;
+                case R.id.miSearch:
+                    Toast.makeText(MainProductos.this, "Search Seleccionado", Toast.LENGTH_SHORT).show();
+                    return true;
+                case R.id.miFilter:
+                    Toast.makeText(MainProductos.this, "Filter Seleccionado", Toast.LENGTH_SHORT).show();
+                    return true;
+            }
+            return false;
+        }
+    };
 }

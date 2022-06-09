@@ -98,13 +98,12 @@ public class EditProducts extends Fragment {
 
         // Inicializar los campos
         insertNombre.setText(nombre, TextView.BufferType.EDITABLE);
-        insertDescripcion.setText(descripcion);
-        insertPventa.setText(pventa);
-        insertPcompra.setText(pcompra);
-        insertFecha.setText(fecha);
-        insertCantidad.setText(cantidad);
-        insertActivo.setText(activo);
-        insertCategoria.setText(categoria);
+        insertDescripcion.setText(descripcion, TextView.BufferType.EDITABLE);
+        insertPventa.setText(pventa, TextView.BufferType.EDITABLE);
+        insertPcompra.setText(pcompra, TextView.BufferType.EDITABLE);
+        insertCantidad.setText(cantidad, TextView.BufferType.EDITABLE);
+        insertActivo.setText(activo, TextView.BufferType.EDITABLE);
+        insertCategoria.setText(categoria, TextView.BufferType.EDITABLE);
 
         // Selection Categoria
         CategorySelection();
