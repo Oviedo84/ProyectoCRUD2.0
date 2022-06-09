@@ -20,11 +20,45 @@
         android:gravity="center_horizontal"
         android:textSize="34sp" />
 
-    <TextView
-        android:id="@+id/tView"
-        android:layout_width="160dp"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:layout_marginTop="16dp">
+        <TextView
+            android:id="@+id/prodNombre"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="8dp"
+            android:fontFamily="@font/work_sans"
+            android:gravity="center"
+            android:text="Nombre"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/prodDescripcion"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_toRightOf="@id/prodNombre"
+            android:fontFamily="@font/work_sans"
+            android:gravity="center"
+            android:text="Descripcion"
+            android:textSize="18dp"/>
+
+        <TextView
+            android:id="@+id/prodPrecio"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@id/prodDescripcion"
+            android:fontFamily="@font/work_sans"
+            android:gravity="center"
+            android:text="Precio"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"

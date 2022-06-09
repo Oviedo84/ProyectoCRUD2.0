@@ -1,5 +1,7 @@
 package com.example.crud;
 
+import java.io.Serializable;
+
 public class GetProducts {
     private String producto_id, nombre, descripcion, p_venta, p_compra, fecha, activo, cantidad;
 

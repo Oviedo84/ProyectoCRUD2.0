@@ -32,13 +32,14 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListProducts extends Fragment {
+public class ListProducts extends Fragment{
     private String products = "http://192.168.0.8:8080/listProd";
     RequestQueue requestQueue;
     RecyclerView recyclerView;
     GetProducts getProducts;
     List<GetProducts> mProducto;
-    Adapter adapter;
+    AdapterProducts adapterProducts;
+    AdapterProducts.RecyclerViewClickListener listener;
     TextView textView;
 
     @Nullable
@@ -49,10 +50,9 @@ public class ListProducts extends Fragment {
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
 
-        textView = (TextView) view.findViewById(R.id.tView);
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mProducto = new ArrayList<>();
@@ -83,8 +83,9 @@ public class ListProducts extends Fragment {
                                 String cantidad = jsonObject.getString("cantidad");
                                 getProducts = new GetProducts(producto_id, nombre, descripcion, p_venta, p_compra, fecha, activo, cantidad);
                                 mProducto.add(getProducts);
-                                recyclerView.setAdapter(adapter);
-                                adapter = new Adapter(mProducto, getContext());
+                                setOnClickListener();
+                                recyclerView.setAdapter(adapterProducts);
+                                adapterProducts = new AdapterProducts(mProducto, getContext(), listener);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -101,6 +102,31 @@ public class ListProducts extends Fragment {
         requestQueue.add(arrayRequest);
     }
 
+    void setOnClickListener() {
+        listener = new AdapterProducts.RecyclerViewClickListener() {
+            @Override
+            public void onClick(View v, int position) {
+                GetProducts aux = mProducto.get(position);
+                Bundle bundle = new Bundle();
+                bundle.putString("id", aux.getProducto_id());
+                bundle.putString("nombre", aux.getNombre());
+                bundle.putString("descripcion", aux.getDescripcion());
+                bundle.putString("p_venta", aux.getP_venta());
+                bundle.putString("p_compra", aux.getP_compra());
+                bundle.putString("fecha", aux.getFecha());
+                bundle.putString("activo", aux.getActivo());
+                bundle.putString("cantidad", aux.getCantidad());
+                Fragment main = new EditProducts();
+                main.setArguments(bundle);
+                FragmentManager fragmentManager = getParentFragmentManager();
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.load_fragment, main);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        };
+    }
+
     public void deleteProducts(){
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT){
             @Override
@@ -115,8 +141,8 @@ public class ListProducts extends Fragment {
                 String id = a.getProducto_id();
                 eliminarProducto(id);
                 mProducto.remove(viewHolder.getBindingAdapterPosition());
-                recyclerView.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
+                recyclerView.setAdapter(adapterProducts);
+                adapterProducts.notifyDataSetChanged();
             }
         }).attachToRecyclerView(recyclerView);
     }
