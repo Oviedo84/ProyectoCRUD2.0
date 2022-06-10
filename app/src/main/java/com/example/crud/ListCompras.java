@@ -32,38 +32,39 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListProducts extends Fragment{
-    private String products = "http://192.168.0.8:8080/listProd";
+public class ListCompras extends Fragment {
+    private String compras = "http://192.168.0.8:8080/listComp";
     RequestQueue requestQueue;
     RecyclerView recyclerView;
-    GetProducts getProducts;
-    List<GetProducts> mProducto;
-    AdapterProducts adapterProducts;
+    GetCompras getCompras;
+    List<GetCompras> mCompra;
+    AdapterCompras adapter;
+    TextView textView;
     AdapterProducts.RecyclerViewClickListener listener;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_list_products, container, false);
+        View view = inflater.inflate(R.layout.fragment_list_compras, container, false);
         return view;
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mProducto = new ArrayList<>();
+        mCompra = new ArrayList<>();
         requestQueue = Volley.newRequestQueue(getContext());
-        this.getProducts();
-        this.deleteProducts();
+        this.getCompras();
+        this.deleteCompras();
     }
 
-    private void getProducts(){
+    private void getCompras(){
         JsonArrayRequest arrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
-                products,
+                compras,
                 null,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -72,19 +73,17 @@ public class ListProducts extends Fragment{
                         for (int i = 0; i < size; i++) {
                             try {
                                 JSONObject jsonObject = new JSONObject(response.get(i).toString());
+                                String compra_id = jsonObject.getString("compra_id");
                                 String producto_id = jsonObject.getString("producto_id");
-                                String nombre = jsonObject.getString("nombre");
-                                String descripcion = jsonObject.getString("descripcion");
-                                String p_venta = jsonObject.getString("p_venta");
-                                String p_compra = jsonObject.getString("p_compra");
+                                String usuario_id = jsonObject.getString("usuario_id");
                                 String fecha = jsonObject.getString("fecha");
-                                String activo = jsonObject.getString("activo");
                                 String cantidad = jsonObject.getString("cantidad");
-                                getProducts = new GetProducts(producto_id, nombre, descripcion, p_venta, p_compra, fecha, activo, cantidad);
-                                mProducto.add(getProducts);
+                                String proveedor = jsonObject.getString("proveedor");
+                                getCompras = new GetCompras(compra_id, producto_id, usuario_id, fecha, cantidad, proveedor);
+                                mCompra.add(getCompras);
                                 setOnClickListener();
-                                recyclerView.setAdapter(adapterProducts);
-                                adapterProducts = new AdapterProducts(mProducto, getContext(), listener);
+                                recyclerView.setAdapter(adapter);
+                                adapter = new AdapterCompras(mCompra, getContext(), listener);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -105,17 +104,15 @@ public class ListProducts extends Fragment{
         listener = new AdapterProducts.RecyclerViewClickListener() {
             @Override
             public void onClick(View v, int position) {
-                GetProducts aux = mProducto.get(position);
+                GetCompras aux = mCompra.get(position);
                 Bundle bundle = new Bundle();
-                bundle.putString("id", aux.getProducto_id());
-                bundle.putString("nombre", aux.getNombre());
-                bundle.putString("descripcion", aux.getDescripcion());
-                bundle.putString("p_venta", aux.getP_venta());
-                bundle.putString("p_compra", aux.getP_compra());
+                bundle.putString("producto_id", aux.getProducto_id());
+                bundle.putString("compra_id", aux.getCompra_id());
+                bundle.putString("usuario_id", aux.getUsuario_id());
                 bundle.putString("fecha", aux.getFecha());
-                bundle.putString("activo", aux.getActivo());
                 bundle.putString("cantidad", aux.getCantidad());
-                Fragment main = new EditProducts();
+                bundle.putString("proveedor", aux.getProveedor());
+                Fragment main = new EditCompras();
                 main.setArguments(bundle);
                 FragmentManager fragmentManager = getParentFragmentManager();
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -126,7 +123,7 @@ public class ListProducts extends Fragment{
         };
     }
 
-    public void deleteProducts(){
+    public void deleteCompras(){
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT){
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -136,21 +133,21 @@ public class ListProducts extends Fragment{
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 int pos = viewHolder.getBindingAdapterPosition();
-                GetProducts a = mProducto.get(pos);
-                String id = a.getProducto_id();
-                eliminarProducto(id);
-                mProducto.remove(viewHolder.getBindingAdapterPosition());
-                recyclerView.setAdapter(adapterProducts);
-                adapterProducts.notifyDataSetChanged();
+                GetCompras a = mCompra.get(pos);
+                String id = a.getCompra_id();
+                eliminarCompra(id);
+                mCompra.remove(viewHolder.getBindingAdapterPosition());
+                recyclerView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
             }
         }).attachToRecyclerView(recyclerView);
     }
 
-    public void eliminarProducto(String id) {
-        String deleteProduct = "http://192.168.0.8:8080/deleteProduct/" + id;
+    public void eliminarCompra(String id) {
+        String deleteCompra = "http://10.0.2.2:8080/deleteCompra/" + id;
         StringRequest stringRequest = new StringRequest(
                 Request.Method.DELETE,
-                deleteProduct,
+                deleteCompra,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

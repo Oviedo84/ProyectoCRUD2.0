@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ListUsers"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/topText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="32dp"
+        android:fontFamily="@font/work_sans"
+        android:text="Usuarios"
+        android:gravity="center_horizontal"
+        android:textSize="34sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:id="@+id/usuario"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="8dp"
+            android:fontFamily="@font/work_sans"
+            android:text="Usuario"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/nivel_id"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="16dp"
+            android:fontFamily="@font/work_sans"
+            android:layout_toRightOf="@id/usuario"
+            android:text="nivel_id"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@android:layout/simple_selectable_list_item">
+
+    </androidx.recyclerview.widget.RecyclerView>
+</LinearLayout>

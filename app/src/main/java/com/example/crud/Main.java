@@ -56,7 +56,13 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
                         getSupportFragmentManager().beginTransaction().replace(R.id.load_fragment, new InsertProduct()).addToBackStack(null).commit();
                         break;
                     case 2:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.load_fragment, new EditProducts()).addToBackStack(null).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.load_fragment, new InsertCategories()).addToBackStack(null).commit();
+                        break;
+                    case 3:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.load_fragment, new InsertCompra()).addToBackStack(null).commit();
+                        break;
+                    case 4:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.load_fragment, new InsertUsers()).addToBackStack(null).commit();
                         break;
                 }
             }
@@ -116,22 +122,32 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
     }
 
     private void selectItemNav(MenuItem item) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         switch (item.getItemId()){
             case R.id.nav_productos:
                 numActivity = 1;
-                Toast.makeText(Main.this, "Productos Seleccionado", Toast.LENGTH_SHORT).show();
+                fragmentTransaction.replace(R.id.load_fragment, new ListProducts()).commit();
+                mDrawerLayout.close();
+                floatingActionButton.show();
                 break;
             case R.id.nav_categoria:
                 numActivity = 2;
-                Toast.makeText(Main.this, "Categoria Seleccionado", Toast.LENGTH_SHORT).show();
+                fragmentTransaction.replace(R.id.load_fragment, new ListCategories()).commit();
+                mDrawerLayout.close();
+                floatingActionButton.show();
                 break;
             case R.id.nav_compras:
                 numActivity = 3;
-                Toast.makeText(Main.this, "Compras Seleccionado", Toast.LENGTH_SHORT).show();
+                fragmentTransaction.replace(R.id.load_fragment, new ListCompras()).commit();
+                mDrawerLayout.close();
+                floatingActionButton.show();
                 break;
             case R.id.nav_usuarios:
                 numActivity = 4;
-                Toast.makeText(Main.this, "Usuarios Seleccionado", Toast.LENGTH_SHORT).show();
+                fragmentTransaction.replace(R.id.load_fragment, new ListUsers()).commit();
+                mDrawerLayout.close();
+                floatingActionButton.show();
                 break;
         }
     }

@@ -7,7 +7,7 @@
             android:checked="true"/>
         <item
             android:id="@+id/nav_categoria"
-            android:title="Categoria"
+            android:title="Categorias"
             android:checked="true"/>
         <item
             android:id="@+id/nav_compras"

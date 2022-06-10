@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".InsertCompra">
+
+    <TextView
+        android:id="@+id/topText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="32dp"
+        android:fontFamily="@font/work_sans"
+        android:gravity="center_horizontal"
+        android:text="Editar Compra"
+        android:textSize="34sp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/_id_producto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/topText"
+        android:layout_marginRight="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Id Producto"
+            android:background="@drawable/round_border"
+            android:id="@+id/producto_id"
+            android:fontFamily="@font/work_sans"
+            android:inputType="number"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/_id_usuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/_id_producto"
+        android:layout_marginRight="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Id Usuario"
+            android:background="@drawable/round_border"
+            android:id="@+id/usuario_id"
+            android:fontFamily="@font/work_sans"
+            android:inputType="number"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/_proveedor"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/_id_usuario"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_toRightOf="@id/fecha"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp">
+
+        <EditText
+            android:id="@+id/proveedor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_border"
+            android:fontFamily="@font/work_sans"
+            android:hint="Proveedor" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/fecha"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/_id_usuario"
+        android:layout_marginRight="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp">
+
+        <EditText
+            android:id="@+id/fechaFormat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_border"
+            android:fontFamily="@font/work_sans"
+            android:hint="Fecha"
+            android:inputType="date" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/_cantidad"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fecha"
+        android:layout_marginRight="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Cantidad"
+            android:background="@drawable/round_border"
+            android:id="@+id/cantidad"
+            android:inputType="number"
+            android:fontFamily="@font/work_sans"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/insert_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/round_bg"
+        android:fontFamily="@font/work_sans"
+        android:text="Editar"
+        android:layout_below="@id/_cantidad"/>
+</RelativeLayout>
